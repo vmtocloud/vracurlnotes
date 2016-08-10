@@ -1,0 +1,9 @@
+export VRA=vra-01a.corp.local
+export ACCEPT="application/json"
+curl --insecure -H "Accept: application/json" -H 'Content-Type: application/json' --data '{"username":"devuser@corp.local","password":"VMware1!","tenant":"vsphere.local"}' https://$VRA/identity/api/tokens
+export AUTH="Bearer
+curl --insecure -H "Accept: $ACCEPT" -H "Authorization: $AUTH" https://$VRA/catalog-service/api/consumer/entitledCatalogItemViews | python -m json.tool
+curl --insecure -H "Accept: $ACCEPT" -H "Authorization: $AUTH" 
+| python -m json.tool > /tmp/CentOS7.json
+curl --insecure -H "Accept: application/json" -H "Authorization: $AUTH"
+--data @/tmp/CentOS7.json --verbose -H "Content-Type: application/json" | python -m json.tool
